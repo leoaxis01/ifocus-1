@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { courseCategories, services, companiesAndClients } from "@shared/schema";
+import { IFocusLogo } from "@/components/ifocus-logo";
 import {
-  GraduationCap,
   MapPin,
   Phone,
   Mail,
@@ -20,16 +20,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-10 h-10 rounded-md bg-primary">
-                <GraduationCap className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif font-bold text-lg leading-tight">iFocus</span>
-                <span className="text-xs text-muted-foreground leading-tight">
-                  Info Solutions
-                </span>
-              </div>
+            <Link href="/">
+              <IFocusLogo />
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Transform your career with industry-leading IT training and 100% placement assistance.
@@ -187,7 +179,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-muted-foreground text-center md:text-left">
-              2024 iFocus Info Solutions. All rights reserved.
+              © 2026 iFocus Info Solutions. All rights reserved.
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
               <span>Our Clients:</span>

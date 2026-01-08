@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { IFocusLogo } from "@/components/ifocus-logo";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -31,7 +32,6 @@ import {
   BarChart3,
   Megaphone,
   Palette,
-  GraduationCap,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -52,6 +52,8 @@ const navItems = [
   { name: "About", href: "/about" },
   { name: "Courses", href: "/courses", hasMega: true },
   { name: "Services", href: "/services" },
+  { name: "Placements", href: "/placements" },
+  { name: "Career", href: "/career" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -63,14 +65,8 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full glass border-b" data-testid="header">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2" data-testid="link-logo">
-            <div className="flex items-center justify-center w-10 h-10 rounded-md bg-primary">
-              <GraduationCap className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif font-bold text-lg leading-tight">iFocus</span>
-              <span className="text-xs text-muted-foreground leading-tight">Info Solutions</span>
-            </div>
+          <Link href="/" className="flex items-center" data-testid="link-logo">
+            <IFocusLogo />
           </Link>
 
           <NavigationMenu className="hidden lg:flex">
@@ -172,12 +168,7 @@ export function Header() {
               <SheetContent side="right" className="w-[300px] p-0">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between p-4 border-b">
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-md bg-primary">
-                        <GraduationCap className="h-5 w-5 text-primary-foreground" />
-                      </div>
-                      <span className="font-serif font-bold">iFocus</span>
-                    </div>
+                    <IFocusLogo size="sm" />
                     <Button
                       variant="ghost"
                       size="icon"

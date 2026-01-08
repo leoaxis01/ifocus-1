@@ -71,12 +71,11 @@ export default function Home() {
                   <span>Empowering India Through Skill Development</span>
                 </Badge>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                  Transform Your{" "}
-                  <span className="text-gradient">Tech Career</span> With Us
+                  Empowering Careers with{" "}
+                  <span className="text-gradient">Industry-Ready IT Training</span>
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                  Partnering with government initiatives to deliver quality skill development
-                  programs. Building India's workforce through PMKVY & Skill India aligned training.
+                  iFocus Info Solutions offers job-oriented training with hands-on projects, expert mentors, placement support, and flexible online/offline classes.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">

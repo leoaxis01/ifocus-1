@@ -6,11 +6,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/lib/theme";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Courses from "@/pages/courses";
 import CourseDetail from "@/pages/course-detail";
 import Services from "@/pages/services";
+import Placements from "@/pages/placements";
+import Career from "@/pages/career";
 import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
 
@@ -22,6 +25,8 @@ function Router() {
       <Route path="/courses" component={Courses} />
       <Route path="/courses/:id" component={CourseDetail} />
       <Route path="/services" component={Services} />
+      <Route path="/placements" component={Placements} />
+      <Route path="/career" component={Career} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
@@ -40,6 +45,7 @@ function App() {
             </main>
             <Footer />
           </div>
+          <WhatsAppFloat />
           <Toaster />
         </TooltipProvider>
       </ThemeProvider>
