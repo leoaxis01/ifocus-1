@@ -7,6 +7,7 @@ import { ServiceCard } from "@/components/service-card";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { StatsSection } from "@/components/stats-section";
 import { PartnerLogos } from "@/components/partner-logos";
+
 import {
   courseCategories,
   allCourses,
@@ -375,36 +376,47 @@ export default function Home() {
       </section>
 
       {/* Companies & Clients */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Our Clients
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Trusted by Leading Companies
-            </h2>
-            <p className="text-muted-foreground">
-              We work with top companies for corporate training and placement partnerships
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {companiesAndClients.map((company) => (
-              <Card
-                key={company.id}
-                className="overflow-visible"
-                data-testid={`client-${company.id}`}
-              >
-                <CardContent className="p-4 flex items-center justify-center min-h-[80px]">
-                  <span className="font-medium text-sm text-center text-muted-foreground">
-                    {company.name}
-                  </span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+     <section className="py-20 bg-muted/30 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <Badge variant="secondary" className="mb-4">
+            Our Clients
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Trusted by Leading Companies
+          </h2>
+          <p className="text-muted-foreground">
+            We work with top companies for corporate training and placement partnerships
+          </p>
         </div>
-      </section>
+
+        {/* Marquee */}
+        <div className="relative w-full overflow-hidden">
+  {/* Left fade */}
+  <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent z-10" />
+  {/* Right fade */}
+  <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent z-10" />
+
+  <div className="flex w-max animate-marquee">
+    {[...companiesAndClients, ...companiesAndClients].map((company, i) => (
+      <div
+        key={`${company.id}-${i}`}
+        className="flex items-center justify-center mx-8 min-w-[140px]"
+      >
+        <img
+          src={company.logo}
+          alt={company.name}
+          className="h-12 sm:h-14 md:h-16 object-contain"
+          loading="lazy"
+        />
+      </div>
+    ))}
+  </div>
+</div>
+
+      </div>
+    </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-primary text-primary-foreground">

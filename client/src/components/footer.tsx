@@ -30,7 +30,7 @@ export function Footer() {
             <div className="flex items-center gap-2 flex-wrap">
               <Button variant="ghost" size="icon" asChild>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/share/1DfqVAZk79/?mibextid=wwXIfr"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -38,7 +38,9 @@ export function Footer() {
                   <Facebook className="h-4 w-4" />
                 </a>
               </Button>
-              <Button variant="ghost" size="icon" asChild>
+              {/* Twitter button */}
+              
+              {/* <Button variant="ghost" size="icon" asChild>
                 <a
                   href="https://twitter.com"
                   target="_blank"
@@ -47,7 +49,7 @@ export function Footer() {
                 >
                   <Twitter className="h-4 w-4" />
                 </a>
-              </Button>
+              </Button> */}
               <Button variant="ghost" size="icon" asChild>
                 <a
                   href="https://linkedin.com"
@@ -60,7 +62,7 @@ export function Footer() {
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/ifocusinfosolutions/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -70,7 +72,7 @@ export function Footer() {
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <a
-                  href="https://youtube.com"
+                  href="https://www.youtube.com/channel/UChWjnWoCMuxsIMQjv_za3oA"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="YouTube"
@@ -143,10 +145,10 @@ export function Footer() {
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-primary flex-shrink-0" />
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919440086767"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  +91 98765 43210
+                  +91 94400 86767
                 </a>
               </li>
               <li className="flex items-center gap-3">

@@ -1078,31 +1078,36 @@ export const services: Service[] = [
   { id: "govt-programs", name: "Government Skill Programs", description: "Partnership programs with government bodies for employment-focused skill development", icon: "Landmark" },
 ];
 
-// Placement Partners
-export const placementPartners = [
-  "Zepto",
-  "VBLP Technologies",
-  "Hashtag",
-  "BPO Convergences",
-  "JD Overseas",
-  "Ushnik Technologies",
+// shared/schema.ts
+export interface PlacementPartner {
+  name: string;
+  logo: string;
+}
+
+export const placementPartners: PlacementPartner[] = [
+  { name: "Hashtag", logo: "/logos/Hashtag.png" },
+  { name: "Zepto",  logo: "/logos/zepto.png" },
+  { name: "VBLP Technologies", logo: "/logos/VBLP.png" },
+  { name: "Ushnik Technologies", logo: "/logos/Ushnik.png" },
+  { name: "JD Overseas", logo: "/logos/JDoverseas.png" },
 ];
 
-// Companies & Clients
+// data/companies.ts
 export interface CompanyClient {
   id: string;
   name: string;
-  type: "corporate" | "startup" | "educational";
+  type: "startup" | "corporate";
+  logo: string;
 }
 
 export const companiesAndClients: CompanyClient[] = [
-  { id: "1", name: "Zepto", type: "startup" },
-  { id: "2", name: "VBLP Technologies", type: "corporate" },
-  { id: "3", name: "Hashtag", type: "corporate" },
-  { id: "4", name: "BPO Convergences", type: "corporate" },
-  { id: "5", name: "JD Overseas", type: "corporate" },
-  { id: "6", name: "Ushnik Technologies", type: "startup" },
+  { id: "1", name: "Zepto", type: "startup", logo: "/logos/zepto.png" },
+  { id: "2", name: "VBLP Technologies", type: "corporate", logo: "/logos/VBLP.png" },
+  { id: "3", name: "Hashtag", type: "corporate", logo: "/logos/Hashtag.png" },
+  { id: "4", name: "JD Overseas", type: "corporate", logo: "/logos/JDoverseas.png" },
+  { id: "5", name: "Ushnik Technologies", type: "startup", logo: "/logos/Ushnik.png" },
 ];
+
 
 // Testimonials
 export interface Testimonial {
