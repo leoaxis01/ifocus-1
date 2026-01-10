@@ -16,9 +16,14 @@ import Placements from "@/pages/placements";
 import Career from "@/pages/career";
 import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
+import ScrollToTop from "./components/ScrollToTop";
+import CursorSpark from "./components/CursorSpark";
 
 function Router() {
   return (
+    <>
+    <ScrollToTop />
+    <CursorSpark /> 
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
@@ -30,6 +35,7 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
+    </>
   );
 }
 

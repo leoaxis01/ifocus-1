@@ -3,18 +3,44 @@ import { placementPartners } from "@shared/schema";
 export function PartnerLogos() {
   return (
     <div
-      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4"
+      className="
+        grid
+        grid-cols-[repeat(auto-fit,minmax(180px,1fr))]
+        gap-6
+        justify-items-center
+        max-w-5xl
+        mx-auto
+      "
       data-testid="partner-logos"
     >
       {placementPartners.map((partner) => (
         <div
-          key={partner}
-          className="flex items-center justify-center p-4 md:p-6 rounded-lg bg-card border hover-elevate transition-all"
-          data-testid={`partner-${partner.toLowerCase().replace(/\s+/g, "-")}`}
+          key={partner.name}
+          className="
+            group
+            w-full
+            max-w-[220px]
+            flex items-center justify-center
+            p-6 md:p-8
+            rounded-xl
+            bg-card border
+            animate-slide-up
+            transition-all duration-300
+            hover:shadow-lg
+            hover:-translate-y-1
+          "
         >
-          <span className="text-sm font-medium text-muted-foreground text-center">
-            {partner}
-          </span>
+          <img
+            src={partner.logo}
+            alt={partner.name}
+            className="
+              h-12 md:h-14
+              object-contain
+              transition-transform duration-300
+              group-hover:scale-110
+            "
+            loading="lazy"
+          />
         </div>
       ))}
     </div>

@@ -1,5 +1,5 @@
 export function WhatsAppFloat() {
-  const phoneNumber = "+91XXXXXXXXXX"; // Replace with actual WhatsApp number
+  const phoneNumber = "+919440086767"; // Replace with actual WhatsApp number
   const message = "Hi! I'm interested in learning more about iFocus Info Solutions courses.";
   
   const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
