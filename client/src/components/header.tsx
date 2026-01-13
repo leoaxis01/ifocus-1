@@ -18,7 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { courseCategories, allCourses } from "@shared/schema";
+import { courseCategories, allCourses, services } from "@shared/schema";
 import {
   Menu,
   X,
@@ -32,6 +32,16 @@ import {
   BarChart3,
   Megaphone,
   Palette,
+  Smartphone,
+  Users,
+  Wallet,
+  TrendingUp,
+  Building2,
+  GraduationCap,
+  Wrench,
+  Briefcase,
+  Heart,
+  Landmark,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -45,13 +55,23 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   BarChart3,
   Megaphone,
   Palette,
+  Smartphone,
+  Users,
+  Wallet,
+  TrendingUp,
+  Building2,
+  GraduationCap,
+  Wrench,
+  Briefcase,
+  Heart,
+  Landmark,
 };
 
 const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Courses", href: "/courses", hasMega: true },
-  { name: "Services", href: "/services" },
+  { name: "Services", href: "/services", hasMega: true },
   { name: "Placements", href: "/placements" },
   { name: "Career", href: "/career" },
   { name: "Contact", href: "/contact" },
@@ -75,65 +95,94 @@ export function Header() {
                 item.hasMega ? (
                   <NavigationMenuItem key={item.name}>
                     <NavigationMenuTrigger
-                      className={location.startsWith("/courses") ? "text-primary" : ""}
-                      data-testid="nav-courses-trigger"
+                      className={location.startsWith(item.href) ? "text-primary" : ""}
+                      data-testid={`nav-${item.name.toLowerCase()}-trigger`}
                     >
                       {item.name}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="w-[800px] p-4" data-testid="mega-menu-courses">
-                        <div className="grid grid-cols-5 gap-4">
-                          {courseCategories.map((category) => {
-                            const Icon = iconMap[category.icon];
-                            const categoryCourses = allCourses.filter(
-                              (c) => c.category === category.id
-                            );
-                            return (
-                              <div key={category.id} className="space-y-2">
+                      {item.name === "Courses" ? (
+                        <div className="w-[800px] p-4" data-testid="mega-menu-courses">
+                          <div className="grid grid-cols-5 gap-4">
+                            {courseCategories.map((category) => {
+                              const Icon = iconMap[category.icon];
+                              const categoryCourses = allCourses.filter(
+                                (c) => c.category === category.id
+                              );
+                              return (
+                                <div key={category.id} className="space-y-2">
+                                  <Link
+                                    href={`/courses?category=${category.id}`}
+                                    className="flex items-center gap-2 font-medium text-sm hover-elevate rounded-md p-1 -ml-1"
+                                  >
+                                    {Icon && <Icon className="h-4 w-4 text-primary" />}
+                                    <span>{category.name}</span>
+                                  </Link>
+                                  <ul className="space-y-1">
+                                    {categoryCourses.slice(0, 4).map((course) => (
+                                      <li key={course.id}>
+                                        <Link
+                                          href={`/courses/${course.id}`}
+                                          className="text-sm text-muted-foreground hover:text-foreground transition-colors block py-0.5"
+                                        >
+                                          {course.name}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                    {categoryCourses.length > 4 && (
+                                      <li>
+                                        <Link
+                                          href={`/courses?category=${category.id}`}
+                                          className="text-sm text-primary hover:underline py-0.5 block"
+                                        >
+                                          +{categoryCourses.length - 4} more
+                                        </Link>
+                                      </li>
+                                    )}
+                                  </ul>
+                                </div>
+                              );
+                            })}
+                          </div>
+                          <div className="mt-4 pt-4 border-t flex justify-between items-center">
+                            <span className="text-sm text-muted-foreground">
+                              Explore all {allCourses.length}+ courses
+                            </span>
+                            <Link href="/courses">
+                              <Button variant="outline" size="sm">
+                                View All Courses
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="w-[400px] p-4" data-testid="mega-menu-services">
+                          <div className="grid grid-cols-2 gap-2">
+                            {services.map((service) => {
+                              const Icon = iconMap[service.icon];
+                              return (
                                 <Link
-                                  href={`/courses?category=${category.id}`}
-                                  className="flex items-center gap-2 font-medium text-sm hover-elevate rounded-md p-1 -ml-1"
+                                  key={service.id}
+                                  href="/services"
+                                  className="flex items-center gap-3 p-2 rounded-md hover:bg-accent/50 transition-colors text-sm"
                                 >
-                                  {Icon && <Icon className="h-4 w-4 text-primary" />}
-                                  <span>{category.name}</span>
+                                  <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                    {Icon && <Icon className="h-4 w-4 text-primary" />}
+                                  </div>
+                                  <span className="font-medium">{service.name}</span>
                                 </Link>
-                                <ul className="space-y-1">
-                                  {categoryCourses.slice(0, 4).map((course) => (
-                                    <li key={course.id}>
-                                      <Link
-                                        href={`/courses/${course.id}`}
-                                        className="text-sm text-muted-foreground hover:text-foreground transition-colors block py-0.5"
-                                      >
-                                        {course.name}
-                                      </Link>
-                                    </li>
-                                  ))}
-                                  {categoryCourses.length > 4 && (
-                                    <li>
-                                      <Link
-                                        href={`/courses?category=${category.id}`}
-                                        className="text-sm text-primary hover:underline py-0.5 block"
-                                      >
-                                        +{categoryCourses.length - 4} more
-                                      </Link>
-                                    </li>
-                                  )}
-                                </ul>
-                              </div>
-                            );
-                          })}
+                              );
+                            })}
+                          </div>
+                          <div className="mt-4 pt-4 border-t">
+                            <Link href="/services">
+                              <Button variant="outline" size="sm" className="w-full">
+                                View All Services
+                              </Button>
+                            </Link>
+                          </div>
                         </div>
-                        <div className="mt-4 pt-4 border-t flex justify-between items-center">
-                          <span className="text-sm text-muted-foreground">
-                            Explore all {allCourses.length}+ courses
-                          </span>
-                          <Link href="/courses">
-                            <Button variant="outline" size="sm">
-                              View All Courses
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
+                      )}
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                 ) : (
@@ -187,22 +236,41 @@ export function Header() {
                             </AccordionTrigger>
                             <AccordionContent>
                               <div className="space-y-4 pl-2">
-                                {courseCategories.map((category) => {
-                                  const Icon = iconMap[category.icon];
-                                  return (
-                                    <Link
-                                      key={category.id}
-                                      href={`/courses?category=${category.id}`}
-                                      className="flex items-center gap-2 py-1"
-                                      onClick={() => setMobileOpen(false)}
-                                    >
-                                      {Icon && (
-                                        <Icon className="h-4 w-4 text-primary" />
-                                      )}
-                                      <span className="text-sm">{category.name}</span>
-                                    </Link>
-                                  );
-                                })}
+                                {item.name === "Courses" ? (
+                                  courseCategories.map((category) => {
+                                    const Icon = iconMap[category.icon];
+                                    return (
+                                      <Link
+                                        key={category.id}
+                                        href={`/courses?category=${category.id}`}
+                                        className="flex items-center gap-2 py-1"
+                                        onClick={() => setMobileOpen(false)}
+                                      >
+                                        {Icon && (
+                                          <Icon className="h-4 w-4 text-primary" />
+                                        )}
+                                        <span className="text-sm">{category.name}</span>
+                                      </Link>
+                                    );
+                                  })
+                                ) : (
+                                  services.map((service) => {
+                                    const Icon = iconMap[service.icon];
+                                    return (
+                                      <Link
+                                        key={service.id}
+                                        href="/services"
+                                        className="flex items-center gap-2 py-1"
+                                        onClick={() => setMobileOpen(false)}
+                                      >
+                                        {Icon && (
+                                          <Icon className="h-4 w-4 text-primary" />
+                                        )}
+                                        <span className="text-sm">{service.name}</span>
+                                      </Link>
+                                    );
+                                  })
+                                )}
                               </div>
                             </AccordionContent>
                           </AccordionItem>

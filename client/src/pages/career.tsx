@@ -25,14 +25,6 @@ import {
   ArrowRight,
   Send,
   Building2,
-  Code,
-  Database,
-  Cloud,
-  TestTube,
-  BarChart3,
-  Cog,
-  Zap,
-  Wrench,
 } from "lucide-react";
 
 const jobOpenings = [
@@ -134,126 +126,6 @@ const jobOpenings = [
   },
   {
     id: "5",
-    title: "Cloud Computing Trainer (AWS/Azure)",
-    department: "Training",
-    type: "Full-time",
-    location: "Hyderabad",
-    experience: "3-6 years",
-    mode: "Offline",
-    description: "We are seeking a Cloud Computing trainer with AWS/Azure expertise to deliver comprehensive cloud training programs.",
-    requirements: [
-      "3+ years of cloud computing experience",
-      "AWS/Azure certifications preferred",
-      "DevOps and containerization knowledge",
-      "Infrastructure as Code experience",
-      "Strong presentation and communication skills"
-    ],
-    responsibilities: [
-      "Deliver cloud computing courses",
-      "Provide hands-on lab sessions",
-      "Guide certification preparation",
-      "Design cloud architecture projects",
-      "Mentor students in cloud best practices"
-    ]
-  },
-  {
-    id: "6",
-    title: "Software Testing Trainer",
-    department: "Training",
-    type: "Full-time",
-    location: "Hyderabad",
-    experience: "3-5 years",
-    mode: "Offline",
-    description: "Join us as a Software Testing trainer to teach manual and automation testing methodologies to aspiring QA professionals.",
-    requirements: [
-      "3+ years of software testing experience",
-      "Expertise in Selenium, TestNG, API testing",
-      "Knowledge of testing frameworks and tools",
-      "ISTQB certification preferred",
-      "Experience in training or mentoring"
-    ],
-    responsibilities: [
-      "Conduct manual and automation testing courses",
-      "Teach testing frameworks and best practices",
-      "Guide students in testing projects",
-      "Prepare students for certification exams",
-      "Develop testing scenarios and case studies"
-    ]
-  },
-  {
-    id: "7",
-    title: "EV Technician Trainer",
-    department: "Emerging Technologies",
-    type: "Full-time",
-    location: "Hyderabad",
-    experience: "2-4 years",
-    mode: "Offline",
-    description: "Exciting opportunity to train students in Electric Vehicle technology, maintenance, and repair as the automotive industry transforms.",
-    requirements: [
-      "2+ years in automotive/EV industry",
-      "Knowledge of EV systems and components",
-      "Understanding of battery technology",
-      "Electrical and mechanical aptitude",
-      "Willingness to learn and adapt to new technologies"
-    ],
-    responsibilities: [
-      "Train students in EV technology fundamentals",
-      "Conduct hands-on workshops on EV maintenance",
-      "Teach battery management systems",
-      "Guide practical repair and diagnostic sessions",
-      "Stay updated with EV industry developments"
-    ]
-  },
-  {
-    id: "8",
-    title: "Robotics Trainer",
-    department: "Emerging Technologies",
-    type: "Full-time",
-    location: "Hyderabad",
-    experience: "2-5 years",
-    mode: "Offline",
-    description: "Lead our robotics training program and inspire students to build and program robots for various applications.",
-    requirements: [
-      "2+ years in robotics or automation",
-      "Programming skills (Python, C++, Arduino)",
-      "Knowledge of sensors, actuators, and control systems",
-      "Experience with robotics platforms",
-      "Passion for emerging technologies"
-    ],
-    responsibilities: [
-      "Deliver robotics programming courses",
-      "Guide robot building and programming projects",
-      "Teach automation and control concepts",
-      "Organize robotics competitions and events",
-      "Develop innovative robotics curriculum"
-    ]
-  },
-  {
-    id: "9",
-    title: "Drone Technology Trainer",
-    department: "Emerging Technologies",
-    type: "Full-time",
-    location: "Hyderabad",
-    experience: "2-4 years",
-    mode: "Offline",
-    description: "Train the next generation of drone pilots and technicians in this rapidly growing field with applications across industries.",
-    requirements: [
-      "2+ years in drone/UAV technology",
-      "Drone pilot certification (DGCA preferred)",
-      "Knowledge of flight controllers and sensors",
-      "Understanding of drone regulations",
-      "Technical and safety training experience"
-    ],
-    responsibilities: [
-      "Conduct drone piloting and technology courses",
-      "Teach drone assembly and maintenance",
-      "Guide students in aerial photography/videography",
-      "Ensure compliance with aviation regulations",
-      "Develop practical drone applications training"
-    ]
-  },
-  {
-    id: "10",
     title: "Placement Coordinator",
     department: "Placement",
     type: "Full-time",
@@ -461,7 +333,7 @@ export default function Career() {
               Open Positions
             </h2>
             <p className="text-muted-foreground">
-              Explore exciting career opportunities across different departments and technologies.
+              Fresh opportunities from our hiring partners. Apply now and kickstart your career.
             </p>
           </div>
           <div className="space-y-6">
@@ -553,6 +425,8 @@ export default function Career() {
           </div>
         </div>
       </section>
+
+
 
       {/* Application Form */}
       <section id="application-form" className="py-20 bg-muted/30">

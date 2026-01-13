@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { courseCategories, services, companiesAndClients } from "@shared/schema";
+import { courseCategories, services } from "@shared/schema";
 import { IFocusLogo } from "@/components/ifocus-logo";
 import {
   MapPin,
@@ -183,15 +183,16 @@ export function Footer() {
             <div className="text-sm text-muted-foreground text-center md:text-left">
               © 2026 iFocus Info Solutions. All rights reserved.
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
-              <span>Our Clients:</span>
-              {companiesAndClients.slice(0, 3).map((client, i) => (
-                <span key={client.id} className="font-medium">
-                  {client.name}
-                  {i < 2 && ","}
-                </span>
-              ))}
-              <span className="text-primary">+more</span>
+            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+              <span>Developed with ❤️ and maintained by</span>
+              <a
+                href="https://www.leoaxis.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                www.leoaxis.com
+              </a>
             </div>
           </div>
         </div>

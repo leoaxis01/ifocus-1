@@ -14,79 +14,7 @@ import {
   Briefcase,
   Target,
   Calendar,
-  MapPin,
-  IndianRupee,
-  Clock,
 } from "lucide-react";
-
-const currentOpenings = [
-  {
-    id: "1",
-    title: "Java Developer",
-    company: "Zepto",
-    location: "Hyderabad",
-    experience: "0-2 years",
-    salary: "3-6 LPA",
-    type: "Full-time",
-    skills: ["Java", "Spring Boot", "MySQL", "REST APIs"],
-    posted: "2 days ago"
-  },
-  {
-    id: "2",
-    title: "React Developer",
-    company: "VBLP Technologies",
-    location: "Bangalore",
-    experience: "1-3 years",
-    salary: "4-8 LPA",
-    type: "Full-time",
-    skills: ["React.js", "JavaScript", "Node.js", "MongoDB"],
-    posted: "1 week ago"
-  },
-  {
-    id: "3",
-    title: "Data Analyst",
-    company: "Hashtag",
-    location: "Hyderabad",
-    experience: "0-1 years",
-    salary: "2.5-5 LPA",
-    type: "Full-time",
-    skills: ["Python", "SQL", "Power BI", "Excel"],
-    posted: "3 days ago"
-  },
-  {
-    id: "4",
-    title: "DevOps Engineer",
-    company: "Ushnik Technologies",
-    location: "Remote",
-    experience: "2-4 years",
-    salary: "6-12 LPA",
-    type: "Full-time",
-    skills: ["AWS", "Docker", "Kubernetes", "Jenkins"],
-    posted: "5 days ago"
-  },
-  {
-    id: "5",
-    title: "QA Automation Engineer",
-    company: "BPO Convergences",
-    location: "Pune",
-    experience: "1-3 years",
-    salary: "3.5-7 LPA",
-    type: "Full-time",
-    skills: ["Selenium", "Java", "TestNG", "API Testing"],
-    posted: "1 week ago"
-  },
-  {
-    id: "6",
-    title: "UI/UX Designer",
-    company: "JD Overseas",
-    location: "Mumbai",
-    experience: "0-2 years",
-    salary: "3-6 LPA",
-    type: "Full-time",
-    skills: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-    posted: "4 days ago"
-  }
-];
 
 const recentPlacements = [
   {
@@ -244,78 +172,44 @@ export default function Placements() {
         </div>
       </section>
 
-      {/* Current Openings */}
+      {/* Stay Tuned Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-center max-w-2xl mx-auto">
             <Badge variant="secondary" className="mb-4">
-              Current Opportunities
+              Coming Soon
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Current Job Openings
             </h2>
-            <p className="text-muted-foreground">
-              Fresh opportunities from our hiring partners. Apply now and kickstart your career.
+            <p className="text-muted-foreground mb-8">
+              Fresh opportunities from our hiring partners. Stay tuned for exciting career opportunities.
             </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {currentOpenings.map((job) => (
-              <Card key={job.id} className="overflow-visible hover-elevate">
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-serif font-semibold text-lg">{job.title}</h3>
-                      <p className="text-primary font-medium">{job.company}</p>
-                    </div>
-                    <Badge variant="outline">{job.type}</Badge>
-                  </div>
-                  
-                  <div className="space-y-2 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4" />
-                      <span>{job.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Briefcase className="h-4 w-4" />
-                      <span>{job.experience}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <IndianRupee className="h-4 w-4" />
-                      <span>{job.salary}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4" />
-                      <span>Posted {job.posted}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium">Required Skills:</p>
-                    <div className="flex flex-wrap gap-1">
-                      {job.skills.map((skill, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs">
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Link href="/contact">
-                    <Button className="w-full" size="sm">
-                      Apply Now
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/contact">
-              <Button variant="outline" className="gap-2">
-                View More Openings
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+            <div className="bg-muted/30 rounded-lg p-12 space-y-6">
+              <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                <Briefcase className="h-10 w-10 text-primary" />
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold">Stay Tuned!</h3>
+                <p className="text-muted-foreground max-w-md mx-auto">
+                  We're working with our hiring partners to bring you the best job opportunities. 
+                  New openings will be posted here soon.
+                </p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/contact">
+                  <Button className="gap-2">
+                    Get Notified
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/courses">
+                  <Button variant="outline" className="gap-2">
+                    Prepare with Courses
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
