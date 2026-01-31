@@ -86,7 +86,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="flex items-center" data-testid="link-logo">
-            <IFocusLogo />
+            <IFocusLogo size="lg" />
           </Link>
 
           <NavigationMenu className="hidden lg:flex">

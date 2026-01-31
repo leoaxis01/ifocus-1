@@ -21,7 +21,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           <div className="space-y-4">
             <Link href="/">
-              <IFocusLogo />
+              <IFocusLogo size="lg" />
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Transform your career with industry-leading IT training and 100% placement assistance.
