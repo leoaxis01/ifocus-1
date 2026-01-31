@@ -7,6 +7,7 @@ import { ServiceCard } from "@/components/service-card";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { StatsSection } from "@/components/stats-section";
 import { PartnerLogos } from "@/components/partner-logos";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 
 import {
   courseCategories,
@@ -177,54 +178,59 @@ export default function Home() {
       {/* Stats Section */}
       <section className="py-16 bg-card border-y">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <StatsSection />
+          <AnimateOnScroll>
+            <StatsSection />
+          </AnimateOnScroll>
         </div>
       </section>
 
       {/* Course Categories */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Our Programs
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Explore Course Categories
-            </h2>
-            <p className="text-muted-foreground">
-              Choose from 50+ industry-relevant courses across 10 technology domains
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Our Programs
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Explore Course Categories
+              </h2>
+              <p className="text-muted-foreground">
+                Choose from 50+ industry-relevant courses across 10 technology domains
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {courseCategories.map((category) => {
+            {courseCategories.map((category, index) => {
               const Icon = iconMap[category.icon];
               const courseCount = allCourses.filter(
                 (c) => c.category === category.id
               ).length;
               return (
-                <Link
-                  key={category.id}
-                  href={`/courses?category=${category.id}`}
-                >
-                  <Card
-                    className="group overflow-visible hover-elevate cursor-pointer transition-all"
-                    data-testid={`category-card-${category.id}`}
+                <AnimateOnScroll key={category.id} delay={index * 50}>
+                  <Link
+                    href={`/courses?category=${category.id}`}
                   >
-                    <CardContent className="p-4 sm:p-6 text-center space-y-3">
-                      <div className="w-12 h-12 mx-auto rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        {Icon && <Icon className="h-6 w-6 text-primary" />}
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-sm sm:text-base group-hover:text-primary transition-colors">
-                          {category.name}
-                        </h3>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {courseCount} courses
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
+                    <Card
+                      className="group overflow-visible hover-elevate cursor-pointer transition-all"
+                      data-testid={`category-card-${category.id}`}
+                    >
+                      <CardContent className="p-4 sm:p-6 text-center space-y-3">
+                        <div className="w-12 h-12 mx-auto rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                          {Icon && <Icon className="h-6 w-6 text-primary" />}
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-sm sm:text-base group-hover:text-primary transition-colors">
+                            {category.name}
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {courseCount} courses
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </AnimateOnScroll>
               );
             })}
           </div>
@@ -234,23 +240,27 @@ export default function Home() {
       {/* Popular Courses */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
-            <div>
-              <Badge variant="secondary" className="mb-4">
-                Featured
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-bold">Popular Courses</h2>
+          <AnimateOnScroll>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
+              <div>
+                <Badge variant="secondary" className="mb-4">
+                  Featured
+                </Badge>
+                <h2 className="text-3xl sm:text-4xl font-bold">Popular Courses</h2>
+              </div>
+              <Link href="/courses">
+                <Button variant="outline" className="gap-2">
+                  View All Courses
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
-            <Link href="/courses">
-              <Button variant="outline" className="gap-2">
-                View All Courses
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
+          </AnimateOnScroll>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {popularCourses.map((course) => (
-              <CourseCard key={course.id} course={course} />
+            {popularCourses.map((course, index) => (
+              <AnimateOnScroll key={course.id} delay={index * 50}>
+                <CourseCard course={course} />
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -259,29 +269,35 @@ export default function Home() {
       {/* Services */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              What We Offer
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Our Services
-            </h2>
-            <p className="text-muted-foreground">
-              Beyond training, we provide comprehensive IT solutions for individuals and enterprises
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                What We Offer
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Our Services
+              </h2>
+              <p className="text-muted-foreground">
+                Beyond training, we provide comprehensive IT solutions for individuals and enterprises
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+            {featuredServices.map((service, index) => (
+              <AnimateOnScroll key={service.id} delay={index * 50}>
+                <ServiceCard service={service} />
+              </AnimateOnScroll>
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link href="/services">
-              <Button variant="outline" className="gap-2">
-                View All Services
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+            <AnimateOnScroll>
+              <Link href="/services">
+                <Button variant="outline" className="gap-2">
+                  View All Services
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>
@@ -289,20 +305,24 @@ export default function Home() {
       {/* Testimonials */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Success Stories
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              What Our Students Say
-            </h2>
-            <p className="text-muted-foreground">
-              Hear from our alumni who have transformed their careers
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Success Stories
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                What Our Students Say
+              </h2>
+              <p className="text-muted-foreground">
+                Hear from our alumni who have transformed their careers
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+            {testimonials.map((testimonial, index) => (
+              <AnimateOnScroll key={testimonial.id} delay={index * 50}>
+                <TestimonialCard testimonial={testimonial} />
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -311,38 +331,41 @@ export default function Home() {
       {/* Why Choose Us */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Why iFocus
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Why Choose iFocus?
-            </h2>
-            <p className="text-muted-foreground">
-              We are committed to your success with industry-best training and support
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Why iFocus
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Why Choose iFocus?
+              </h2>
+              <p className="text-muted-foreground">
+                We are committed to your success with industry-best training and support
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyChooseUs.map((item, index) => {
               const Icon = iconMap[item.icon];
               return (
-                <Card
-                  key={index}
-                  className="overflow-visible text-center"
-                  data-testid={`why-choose-${index}`}
-                >
-                  <CardContent className="p-6 space-y-4">
-                    <div className="w-14 h-14 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                      {Icon && <Icon className="h-7 w-7 text-primary" />}
-                    </div>
-                    <h3 className="font-serif font-semibold text-lg">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <AnimateOnScroll key={index} delay={index * 50}>
+                  <Card
+                    className="overflow-visible text-center"
+                    data-testid={`why-choose-${index}`}
+                  >
+                    <CardContent className="p-6 space-y-4">
+                      <div className="w-14 h-14 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                        {Icon && <Icon className="h-7 w-7 text-primary" />}
+                      </div>
+                      <h3 className="font-serif font-semibold text-lg">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </AnimateOnScroll>
               );
             })}
           </div>
@@ -352,25 +375,31 @@ export default function Home() {
       {/* Placement Partners */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Our Network
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Placement Partners
-            </h2>
-            <p className="text-muted-foreground">
-              Our students are placed at leading companies across industries
-            </p>
-          </div>
-          <PartnerLogos />
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Our Network
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Placement Partners
+              </h2>
+              <p className="text-muted-foreground">
+                Our students are placed at leading companies across industries
+              </p>
+            </div>
+          </AnimateOnScroll>
+          <AnimateOnScroll>
+            <PartnerLogos />
+          </AnimateOnScroll>
           <div className="text-center mt-8">
-            <Link href="/placements">
-              <Button variant="outline" className="gap-2">
-                View All Placements
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+            <AnimateOnScroll>
+              <Link href="/placements">
+                <Button variant="outline" className="gap-2">
+                  View All Placements
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>
@@ -379,41 +408,45 @@ export default function Home() {
      <section className="py-20 bg-muted/30 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <Badge variant="secondary" className="mb-4">
-            Our Clients
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Trusted by Leading Companies
-          </h2>
-          <p className="text-muted-foreground">
-            We work with top companies for corporate training and placement partnerships
-          </p>
-        </div>
+        <AnimateOnScroll>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <Badge variant="secondary" className="mb-4">
+              Our Clients
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Trusted by Leading Companies
+            </h2>
+            <p className="text-muted-foreground">
+              We work with top companies for corporate training and placement partnerships
+            </p>
+          </div>
+        </AnimateOnScroll>
 
         {/* Marquee */}
-        <div className="relative w-full overflow-hidden">
-  {/* Left fade */}
-  <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent z-10" />
-  {/* Right fade */}
-  <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent z-10" />
+        <AnimateOnScroll>
+          <div className="relative w-full overflow-hidden">
+            {/* Left fade */}
+            <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent z-10" />
+            {/* Right fade */}
+            <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent z-10" />
 
-  <div className="flex w-max animate-marquee">
-    {[...companiesAndClients, ...companiesAndClients].map((company, i) => (
-      <div
-        key={`${company.id}-${i}`}
-        className="flex items-center justify-center mx-8 min-w-[140px]"
-      >
-        <img
-          src={company.logo}
-          alt={company.name}
-          className="h-12 sm:h-14 md:h-16 object-contain"
-          loading="lazy"
-        />
-      </div>
-    ))}
-  </div>
-</div>
+            <div className="flex w-max animate-marquee">
+              {[...companiesAndClients, ...companiesAndClients].map((company, i) => (
+                <div
+                  key={`${company.id}-${i}`}
+                  className="flex items-center justify-center mx-8 min-w-[140px]"
+                >
+                  <img
+                    src={company.logo}
+                    alt={company.name}
+                    className="h-12 sm:h-14 md:h-16 object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </AnimateOnScroll>
 
       </div>
     </section>
@@ -421,35 +454,37 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Ready to Start Your Journey?
-          </h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-            Join thousands of successful professionals who have transformed their
-            careers with iFocus. Schedule a free counseling session today.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="gap-2"
-                data-testid="button-cta-counseling"
-              >
-                Schedule Free Counseling
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="/courses">
-              <Button
-                size="lg"
-                variant="outline"
-                className="gap-2 bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
-              >
-                Browse Courses
-              </Button>
-            </Link>
-          </div>
+          <AnimateOnScroll>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Ready to Start Your Journey?
+            </h2>
+            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+              Join thousands of successful professionals who have transformed their
+              careers with iFocus. Schedule a free counseling session today.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="gap-2"
+                  data-testid="button-cta-counseling"
+                >
+                  Schedule Free Counseling
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/courses">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="gap-2 bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
+                >
+                  Browse Courses
+                </Button>
+              </Link>
+            </div>
+          </AnimateOnScroll>
         </div>
       </section>
     </div>

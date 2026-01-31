@@ -139,7 +139,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">
-                  Hyderabad, Telangana, India
+                  Flat No - 208, 2nd floor, City center, Kothapet Rd, polkampally, Margadarshi Colony, Kothapet, Hyderabad, Telangana 500102
                 </span>
               </li>
               <li className="flex items-center gap-3">

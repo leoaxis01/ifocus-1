@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -39,7 +40,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    content: "Hyderabad, Telangana, India",
+    content: "Flat No - 208, 2nd floor, City center, Kothapet Rd, polkampally, Margadarshi Colony, Kothapet, Hyderabad, Telangana 500102",
     link: null,
   },
   {
@@ -127,14 +128,15 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Form */}
-            <div>
-              <Card className="overflow-visible">
-                <CardContent className="p-8">
-                  {isSubmitted ? (
-                    <div
-                      className="text-center py-12 space-y-4"
-                      data-testid="success-message"
-                    >
+            <AnimateOnScroll>
+              <div>
+                <Card className="overflow-visible">
+                  <CardContent className="p-8">
+                    {isSubmitted ? (
+                      <div
+                        className="text-center py-12 space-y-4"
+                        data-testid="success-message"
+                      >
                       <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
                         <CheckCircle className="h-8 w-8 text-primary" />
                       </div>
@@ -292,27 +294,29 @@ export default function Contact() {
                   )}
                 </CardContent>
               </Card>
-            </div>
+              </div>
+            </AnimateOnScroll>
 
             {/* Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="font-serif text-2xl font-semibold mb-4">
-                  Contact Information
-                </h2>
-                <p className="text-muted-foreground mb-8">
-                  Reach out to us through any of the following channels. We're
-                  here to help you start your journey.
-                </p>
-              </div>
+            <AnimateOnScroll delay={50}>
+              <div className="space-y-8">
+                <div>
+                  <h2 className="font-serif text-2xl font-semibold mb-4">
+                    Contact Information
+                  </h2>
+                  <p className="text-muted-foreground mb-8">
+                    Reach out to us through any of the following channels. We're
+                    here to help you start your journey.
+                  </p>
+                </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                {contactInfo.map((info, index) => (
-                  <Card
-                    key={index}
-                    className="overflow-visible"
-                    data-testid={`contact-info-${index}`}
-                  >
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {contactInfo.map((info, index) => (
+                    <AnimateOnScroll key={index} delay={index * 50}>
+                      <Card
+                        className="overflow-visible"
+                        data-testid={`contact-info-${index}`}
+                      >
                     <CardContent className="p-4 flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <info.icon className="h-5 w-5 text-primary" />
@@ -334,32 +338,36 @@ export default function Contact() {
                       </div>
                     </CardContent>
                   </Card>
+                    </AnimateOnScroll>
                 ))}
               </div>
 
               {/* Map Placeholder */}
-              <Card className="overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="aspect-video bg-muted flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="font-semibold mb-2">Visit Our Office</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Hyderabad, Telangana, India
-                      </p>
-                      <a
-                        href="https://ifocusinfosolutions.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-primary hover:underline mt-2 inline-block"
-                      >
-                        ifocusinfosolutions.com
-                      </a>
+              <AnimateOnScroll>
+                <Card className="overflow-hidden">
+                  <CardContent className="p-0">
+                    <div className="aspect-video bg-muted flex items-center justify-center">
+                      <div className="text-center p-8">
+                        <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                        <h3 className="font-semibold mb-2">Visit Our Office</h3>
+                        <p className="text-sm text-muted-foreground">
+                          Flat No - 208, 2nd floor, City center, Kothapet Rd, polkampally, Margadarshi Colony, Kothapet, Hyderabad, Telangana 500102
+                        </p>
+                        <a
+                          href="https://ifocusinfosolutions.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-primary hover:underline mt-2 inline-block"
+                        >
+                          ifocusinfosolutions.com
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
             </div>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>

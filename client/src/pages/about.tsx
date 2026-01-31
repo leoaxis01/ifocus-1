@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatsSection } from "@/components/stats-section";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import {
   Target,
   Eye,
@@ -101,7 +102,9 @@ export default function About() {
       {/* Stats */}
       <section className="py-16 bg-card border-y">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <StatsSection />
+          <AnimateOnScroll>
+            <StatsSection />
+          </AnimateOnScroll>
         </div>
       </section>
 
@@ -109,60 +112,64 @@ export default function About() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="overflow-visible" data-testid="card-mission">
-              <CardContent className="p-8 space-y-4">
-                <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Target className="h-7 w-7 text-primary" />
-                </div>
-                <h2 className="font-serif text-2xl font-bold">Our Mission</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  To provide industry-relevant, practical IT training that empowers
-                  individuals to achieve their career goals. We are committed to
-                  delivering quality education with hands-on projects, expert guidance,
-                  and comprehensive placement support.
-                </p>
-                <ul className="space-y-2">
-                  {[
-                    "Industry-aligned curriculum",
-                    "Practical, project-based learning",
-                    "Career-focused training approach",
-                    "Continuous skill development",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-            <Card className="overflow-visible" data-testid="card-vision">
-              <CardContent className="p-8 space-y-4">
-                <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <Eye className="h-7 w-7 text-accent" />
-                </div>
-                <h2 className="font-serif text-2xl font-bold">Our Vision</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  To become the most trusted name in IT education by creating
-                  industry-ready professionals who drive innovation and lead the
-                  technology landscape. We envision a future where every aspiring
-                  tech professional has access to quality training.
-                </p>
-                <ul className="space-y-2">
-                  {[
-                    "Global recognition in IT training",
-                    "Shaping future tech leaders",
-                    "Bridging education-industry gap",
-                    "Building a skilled workforce",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+            <AnimateOnScroll>
+              <Card className="overflow-visible" data-testid="card-mission">
+                <CardContent className="p-8 space-y-4">
+                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Target className="h-7 w-7 text-primary" />
+                  </div>
+                  <h2 className="font-serif text-2xl font-bold">Our Mission</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    To provide industry-relevant, practical IT training that empowers
+                    individuals to achieve their career goals. We are committed to
+                    delivering quality education with hands-on projects, expert guidance,
+                    and comprehensive placement support.
+                  </p>
+                  <ul className="space-y-2">
+                    {[
+                      "Industry-aligned curriculum",
+                      "Practical, project-based learning",
+                      "Career-focused training approach",
+                      "Continuous skill development",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={50}>
+              <Card className="overflow-visible" data-testid="card-vision">
+                <CardContent className="p-8 space-y-4">
+                  <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <Eye className="h-7 w-7 text-accent" />
+                  </div>
+                  <h2 className="font-serif text-2xl font-bold">Our Vision</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    To become the most trusted name in IT education by creating
+                    industry-ready professionals who drive innovation and lead the
+                    technology landscape. We envision a future where every aspiring
+                    tech professional has access to quality training.
+                  </p>
+                  <ul className="space-y-2">
+                    {[
+                      "Global recognition in IT training",
+                      "Shaping future tech leaders",
+                      "Bridging education-industry gap",
+                      "Building a skilled workforce",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>
@@ -170,32 +177,35 @@ export default function About() {
       {/* Our Values */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Our Values
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              What Drives Us
-            </h2>
-            <p className="text-muted-foreground">
-              Our core values guide everything we do at iFocus
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Our Values
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                What Drives Us
+              </h2>
+              <p className="text-muted-foreground">
+                Our core values guide everything we do at iFocus
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <Card
-                key={index}
-                className="overflow-visible text-center"
-                data-testid={`value-card-${index}`}
-              >
-                <CardContent className="p-6 space-y-4">
-                  <div className="w-14 h-14 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                    <value.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <h3 className="font-serif font-semibold text-lg">{value.title}</h3>
-                  <p className="text-sm text-muted-foreground">{value.description}</p>
-                </CardContent>
-              </Card>
+              <AnimateOnScroll key={index} delay={index * 50}>
+                <Card
+                  className="overflow-visible text-center"
+                  data-testid={`value-card-${index}`}
+                >
+                  <CardContent className="p-6 space-y-4">
+                    <div className="w-14 h-14 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                      <value.icon className="h-7 w-7 text-primary" />
+                    </div>
+                    <h3 className="font-serif font-semibold text-lg">{value.title}</h3>
+                    <p className="text-sm text-muted-foreground">{value.description}</p>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -248,39 +258,42 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Our Team
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Meet the Experts
-            </h2>
-            <p className="text-muted-foreground">
-              Learn from industry veterans with decades of combined experience
-            </p>
-          </div>
+      {/* TAnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Our Team
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Meet the Experts
+              </h2>
+              <p className="text-muted-foreground">
+                Learn from industry veterans with decades of combined experience
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {teamMembers.map((member, index) => (
-              <Card
-                key={index}
-                className="overflow-visible text-center"
-                data-testid={`team-member-${index}`}
-              >
-                <CardContent className="p-6 space-y-4">
-                  <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-primary">
-                      {member.initials}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="font-serif font-semibold text-lg">
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-primary">{member.role}</p>
-                  </div>
+              <AnimateOnScroll key={index} delay={index * 50}>
+                <Card
+                  className="overflow-visible text-center"
+                  data-testid={`team-member-${index}`}
+                >
+                  <CardContent className="p-6 space-y-4">
+                    <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                      <span className="text-2xl font-bold text-primary">
+                        {member.initials}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-semibold text-lg">
+                        {member.name}
+                      </h3>
+                      <p className="text-sm text-primary">{member.role}</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{member.bio}</p>
+                  </CardContent>
+                </Card>
+              </AnimateOnScrolldiv>
                   <p className="text-sm text-muted-foreground">{member.bio}</p>
                 </CardContent>
               </Card>

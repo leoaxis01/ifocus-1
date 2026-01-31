@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -268,28 +269,32 @@ export default function Career() {
       {/* Why Join Us */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Why iFocus
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Why Work With Us?
-            </h2>
-            <p className="text-muted-foreground">
-              Join a team that's passionate about education and committed to making a difference in students' lives.
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Why iFocus
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Why Work With Us?
+              </h2>
+              <p className="text-muted-foreground">
+                Join a team that's passionate about education and committed to making a difference in students' lives.
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => (
-              <Card key={index} className="overflow-visible text-center">
-                <CardContent className="p-6 space-y-4">
-                  <div className="w-14 h-14 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                    <benefit.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <h3 className="font-serif font-semibold text-lg">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
-                </CardContent>
-              </Card>
+              <AnimateOnScroll key={index} delay={index * 50}>
+                <Card className="overflow-visible text-center">
+                  <CardContent className="p-6 space-y-4">
+                    <div className="w-14 h-14 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                      <benefit.icon className="h-7 w-7 text-primary" />
+                    </div>
+                    <h3 className="font-serif font-semibold text-lg">{benefit.title}</h3>
+                    <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -298,25 +303,29 @@ export default function Career() {
       {/* Company Values */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Our Values
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              What We Stand For
-            </h2>
-            <p className="text-muted-foreground">
-              Our core values guide everything we do and shape our company culture.
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Our Values
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                What We Stand For
+              </h2>
+              <p className="text-muted-foreground">
+                Our core values guide everything we do and shape our company culture.
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid md:grid-cols-2 gap-6">
             {companyValues.map((value, index) => (
-              <Card key={index} className="overflow-visible">
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="font-serif font-semibold text-lg">{value.title}</h3>
-                  <p className="text-muted-foreground">{value.description}</p>
-                </CardContent>
-              </Card>
+              <AnimateOnScroll key={index} delay={index * 50}>
+                <Card className="overflow-visible">
+                  <CardContent className="p-6 space-y-3">
+                    <h3 className="font-serif font-semibold text-lg">{value.title}</h3>
+                    <p className="text-muted-foreground">{value.description}</p>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -325,19 +334,22 @@ export default function Career() {
       {/* Job Openings */}
       <section id="openings" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Current Openings
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Open Positions
-            </h2>
-            <p className="text-muted-foreground">
-              Fresh opportunities from our hiring partners. Apply now and kickstart your career.
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Current Openings
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Open Positions
+              </h2>
+              <p className="text-muted-foreground">
+                Fresh opportunities from our hiring partners. Apply now and kickstart your career.
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="space-y-6">
-            {jobOpenings.map((job) => (
+            {jobOpenings.map((job, index) => (
+              <AnimateOnScroll key={job.id} delay={index * 30}>
               <Card key={job.id} className="overflow-visible">
                 <CardContent className="p-6">
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
@@ -421,6 +433,7 @@ export default function Career() {
                   )}
                 </CardContent>
               </Card>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
@@ -431,139 +444,143 @@ export default function Career() {
       {/* Application Form */}
       <section id="application-form" className="py-20 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Apply Now
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Submit Your Application
-            </h2>
-            <p className="text-muted-foreground">
-              Ready to join our team? Fill out the form below and we'll get back to you soon.
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Apply Now
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Submit Your Application
+              </h2>
+              <p className="text-muted-foreground">
+                Ready to join our team? Fill out the form below and we'll get back to you soon.
+              </p>
+            </div>
+          </AnimateOnScroll>
           
-          <Card className="overflow-visible">
-            <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name *</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
-                      placeholder="Enter your full name"
-                      required
-                    />
+          <AnimateOnScroll>
+            <Card className="overflow-visible">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange("name", e.target.value)}
+                        placeholder="Enter your full name"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
+                        placeholder="Enter your email"
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
-                      placeholder="Enter your email"
-                      required
-                    />
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number *</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange("phone", e.target.value)}
+                        placeholder="Enter your phone number"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="position">Position Applied For *</Label>
+                      <Select value={formData.position} onValueChange={(value) => handleInputChange("position", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select position" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {jobOpenings.map((job) => (
+                            <SelectItem key={job.id} value={job.title}>
+                              {job.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
+                  
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
-                      placeholder="Enter your phone number"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="position">Position Applied For *</Label>
-                    <Select value={formData.position} onValueChange={(value) => handleInputChange("position", value)}>
+                    <Label htmlFor="experience">Years of Experience *</Label>
+                    <Select value={formData.experience} onValueChange={(value) => handleInputChange("experience", value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select position" />
+                        <SelectValue placeholder="Select experience level" />
                       </SelectTrigger>
                       <SelectContent>
-                        {jobOpenings.map((job) => (
-                          <SelectItem key={job.id} value={job.title}>
-                            {job.title}
-                          </SelectItem>
-                        ))}
+                        <SelectItem value="0-1">0-1 years</SelectItem>
+                        <SelectItem value="1-3">1-3 years</SelectItem>
+                        <SelectItem value="3-5">3-5 years</SelectItem>
+                        <SelectItem value="5-8">5-8 years</SelectItem>
+                        <SelectItem value="8+">8+ years</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="experience">Years of Experience *</Label>
-                  <Select value={formData.experience} onValueChange={(value) => handleInputChange("experience", value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select experience level" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="0-1">0-1 years</SelectItem>
-                      <SelectItem value="1-3">1-3 years</SelectItem>
-                      <SelectItem value="3-5">3-5 years</SelectItem>
-                      <SelectItem value="5-8">5-8 years</SelectItem>
-                      <SelectItem value="8+">8+ years</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="resume">Resume/CV Link *</Label>
-                  <Input
-                    id="resume"
-                    value={formData.resume}
-                    onChange={(e) => handleInputChange("resume", e.target.value)}
-                    placeholder="Google Drive/Dropbox link to your resume"
-                    required
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Please share a public link to your resume (Google Drive, Dropbox, etc.)
-                  </p>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="coverLetter">Cover Letter</Label>
-                  <Textarea
-                    id="coverLetter"
-                    value={formData.coverLetter}
-                    onChange={(e) => handleInputChange("coverLetter", e.target.value)}
-                    placeholder="Tell us why you're interested in this position and what makes you a great fit..."
-                    rows={6}
-                  />
-                </div>
-                
-                <div className="flex gap-4">
-                  <Button type="submit" className="gap-2">
-                    Submit Application
-                    <Send className="h-4 w-4" />
-                  </Button>
-                  <Button 
-                    type="button" 
-                    variant="outline"
-                    onClick={() => setFormData({
-                      name: "",
-                      email: "",
-                      phone: "",
-                      position: "",
-                      experience: "",
-                      resume: "",
-                      coverLetter: ""
-                    })}
-                  >
-                    Clear Form
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="resume">Resume/CV Link *</Label>
+                    <Input
+                      id="resume"
+                      value={formData.resume}
+                      onChange={(e) => handleInputChange("resume", e.target.value)}
+                      placeholder="Google Drive/Dropbox link to your resume"
+                      required
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Please share a public link to your resume (Google Drive, Dropbox, etc.)
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="coverLetter">Cover Letter</Label>
+                    <Textarea
+                      id="coverLetter"
+                      value={formData.coverLetter}
+                      onChange={(e) => handleInputChange("coverLetter", e.target.value)}
+                      placeholder="Tell us why you're interested in this position and what makes you a great fit..."
+                      rows={6}
+                    />
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <Button type="submit" className="gap-2">
+                      Submit Application
+                      <Send className="h-4 w-4" />
+                    </Button>
+                    <Button 
+                      type="button" 
+                      variant="outline"
+                      onClick={() => setFormData({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        position: "",
+                        experience: "",
+                        resume: "",
+                        coverLetter: ""
+                      })}
+                    >
+                      Clear Form
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </AnimateOnScroll>
         </div>
       </section>
 

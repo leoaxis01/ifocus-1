@@ -3,6 +3,7 @@ import { useSearch } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import {
   Select,
   SelectContent,
@@ -84,18 +85,20 @@ export default function Courses() {
       {/* Hero */}
       <section className="py-16 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-4">
-              All Courses
-            </Badge>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-              Explore Our <span className="text-gradient">Courses</span>
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              50+ industry-relevant courses across 10 technology domains.
-              Find the perfect program to accelerate your career.
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="max-w-3xl mx-auto text-center">
+              <Badge variant="secondary" className="mb-4">
+                All Courses
+              </Badge>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-4">
+                Explore Our <span className="text-gradient">Courses</span>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                50+ industry-relevant courses across 10 technology domains.
+                Find the perfect program to accelerate your career.
+              </p>
+            </div>
+          </AnimateOnScroll>
         </div>
       </section>
 
@@ -210,27 +213,31 @@ export default function Courses() {
           </div>
 
           {filteredCourses.length === 0 ? (
-            <div
-              className="text-center py-20"
-              data-testid="no-courses-message"
-            >
-              <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-4">
-                <Search className="h-8 w-8 text-muted-foreground" />
+            <AnimateOnScroll>
+              <div
+                className="text-center py-20"
+                data-testid="no-courses-message"
+              >
+                <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-4">
+                  <Search className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <h3 className="font-serif text-xl font-semibold mb-2">
+                  No courses found
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Try adjusting your search or filters
+                </p>
+                <Button variant="outline" onClick={clearFilters}>
+                  Clear all filters
+                </Button>
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-2">
-                No courses found
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Try adjusting your search or filters
-              </p>
-              <Button variant="outline" onClick={clearFilters}>
-                Clear all filters
-              </Button>
-            </div>
+            </AnimateOnScroll>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCourses.map((course) => (
-                <CourseCard key={course.id} course={course} />
+              {filteredCourses.map((course, index) => (
+                <AnimateOnScroll key={course.id} delay={index * 30}>
+                  <CourseCard course={course} />
+                </AnimateOnScroll>
               ))}
             </div>
           )}

@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatsSection } from "@/components/stats-section";
 import { PartnerLogos } from "@/components/partner-logos";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import {
   Building2,
   Users,
@@ -168,102 +169,110 @@ export default function Placements() {
       {/* Stats */}
       <section className="py-16 bg-card border-y">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <StatsSection />
+          <AnimateOnScroll>
+            <StatsSection />
+          </AnimateOnScroll>
         </div>
       </section>
 
       {/* Stay Tuned Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <Badge variant="secondary" className="mb-4">
-              Coming Soon
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Current Job Openings
-            </h2>
-            <p className="text-muted-foreground mb-8">
-              Fresh opportunities from our hiring partners. Stay tuned for exciting career opportunities.
-            </p>
-            <div className="bg-muted/30 rounded-lg p-12 space-y-6">
-              <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                <Briefcase className="h-10 w-10 text-primary" />
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold">Stay Tuned!</h3>
-                <p className="text-muted-foreground max-w-md mx-auto">
-                  We're working with our hiring partners to bring you the best job opportunities. 
-                  New openings will be posted here soon.
-                </p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link href="/contact">
-                  <Button className="gap-2">
-                    Get Notified
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/courses">
-                  <Button variant="outline" className="gap-2">
-                    Prepare with Courses
-                  </Button>
-                </Link>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto">
+              <Badge variant="secondary" className="mb-4">
+                Coming Soon
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Current Job Openings
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Fresh opportunities from our hiring partners. Stay tuned for exciting career opportunities.
+              </p>
+              <div className="bg-muted/30 rounded-lg p-12 space-y-6">
+                <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+                  <Briefcase className="h-10 w-10 text-primary" />
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-bold">Stay Tuned!</h3>
+                  <p className="text-muted-foreground max-w-md mx-auto">
+                    We're working with our hiring partners to bring you the best job opportunities. 
+                    New openings will be posted here soon.
+                  </p>
+                </div>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <Link href="/contact">
+                    <Button className="gap-2">
+                      Get Notified
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/courses">
+                    <Button variant="outline" className="gap-2">
+                      Prepare with Courses
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </AnimateOnScroll>
         </div>
       </section>
 
       {/* Recent Placements */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Success Stories
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Recent Placements
-            </h2>
-            <p className="text-muted-foreground">
-              Our students are getting placed at top companies with excellent packages.
-            </p>
-          </div>
+          <AnimateOnScroll>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Success Stories
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Recent Placements
+              </h2>
+              <p className="text-muted-foreground">
+                Our students are getting placed at top companies with excellent packages.
+              </p>
+            </div>
+          </AnimateOnScroll>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {recentPlacements.map((placement, index) => (
-              <Card key={index} className="overflow-visible">
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="font-bold text-primary">
-                        {placement.name.split(' ').map(n => n[0]).join('')}
-                      </span>
+              <AnimateOnScroll key={index} delay={index * 50}>
+                <Card className="overflow-visible">
+                  <CardContent className="p-6 space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <span className="font-bold text-primary">
+                          {placement.name.split(' ').map(n => n[0]).join('')}
+                        </span>
+                      </div>
+                      <div>
+                        <h3 className="font-serif font-semibold">{placement.name}</h3>
+                        <p className="text-sm text-muted-foreground">{placement.course}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-serif font-semibold">{placement.name}</h3>
-                      <p className="text-sm text-muted-foreground">{placement.course}</p>
+                    
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Company:</span>
+                        <span className="text-sm font-medium text-primary">{placement.company}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Role:</span>
+                        <span className="text-sm font-medium">{placement.role}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Package:</span>
+                        <span className="text-sm font-medium text-green-600">{placement.salary}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Batch:</span>
+                        <span className="text-sm font-medium">{placement.batch}</span>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Company:</span>
-                      <span className="text-sm font-medium text-primary">{placement.company}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Role:</span>
-                      <span className="text-sm font-medium">{placement.role}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Package:</span>
-                      <span className="text-sm font-medium text-green-600">{placement.salary}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Batch:</span>
-                      <span className="text-sm font-medium">{placement.batch}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
