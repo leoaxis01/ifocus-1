@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -36,6 +37,7 @@ import {
   Calendar,
   Play,
   Sparkles,
+  Handshake,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -55,28 +57,160 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Calendar,
 };
 
+const mouHighlightText =
+  "iFocus Info Solutions has entered into a Memorandum of Understanding (MoU) with APPC (Andhra Pradesh Productivity Council) to jointly undertake consultancy services, training programs, capacity building initiatives, research activities, skill development programs, CSR initiatives, and other mutually agreed projects.";
+
+const mouHighlightPhrase =
+  "Memorandum of Understanding (MoU) with APPC (Andhra Pradesh Productivity Council)";
+
+const mouHighlightStartIndex = mouHighlightText.indexOf(mouHighlightPhrase);
+const mouHighlightEndIndex = mouHighlightStartIndex + mouHighlightPhrase.length;
+
 export default function Home() {
   const popularCourses = allCourses.filter((c) => c.popular).slice(0, 6);
   const featuredServices = services.slice(0, 6);
+  const [typedLength, setTypedLength] = useState(0);
+  const [isMouInView, setIsMouInView] = useState(false);
+  const [isMarkerActive, setIsMarkerActive] = useState(false);
+  const mouCardRef = useRef<HTMLDivElement | null>(null);
+  const animationTimeoutRef = useRef<number | null>(null);
+
+  const renderMouText = (text: string, markerActive: boolean) => {
+    const beforeHighlight = text.slice(0, Math.min(text.length, mouHighlightStartIndex));
+    const highlightedText =
+      text.length > mouHighlightStartIndex
+        ? text.slice(
+            mouHighlightStartIndex,
+            Math.min(text.length, mouHighlightEndIndex)
+          )
+        : "";
+    const afterHighlight =
+      text.length > mouHighlightEndIndex ? text.slice(mouHighlightEndIndex) : "";
+
+    return (
+      <>
+        {beforeHighlight}
+        {highlightedText ? (
+          <span
+            className={`marker-highlight ${
+              markerActive ? "text-white" : "text-inherit"
+            } ${
+              markerActive ? "marker-highlight-active" : ""
+            }`}
+          >
+            {highlightedText}
+          </span>
+        ) : null}
+        {afterHighlight}
+      </>
+    );
+  };
+
+  useEffect(() => {
+    const observedCard = mouCardRef.current;
+
+    if (!observedCard) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsMouInView(entry.isIntersecting && entry.intersectionRatio >= 0.2);
+      },
+      {
+        threshold: [0, 0.2, 0.4, 0.7, 1],
+      }
+    );
+
+    observer.observe(observedCard);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (animationTimeoutRef.current) {
+      window.clearTimeout(animationTimeoutRef.current);
+    }
+
+    if (!isMouInView) {
+      setTypedLength(0);
+      setIsMarkerActive(false);
+      return;
+    }
+
+    let cancelled = false;
+
+    const startTypingLoop = () => {
+      setTypedLength(0);
+      setIsMarkerActive(false);
+
+      let currentLength = 0;
+
+      const typeNextCharacter = () => {
+        if (cancelled) {
+          return;
+        }
+
+        currentLength += 1;
+        setTypedLength(currentLength);
+
+        if (currentLength < mouHighlightText.length) {
+          animationTimeoutRef.current = window.setTimeout(typeNextCharacter, 15);
+          return;
+        }
+
+        animationTimeoutRef.current = window.setTimeout(() => {
+          if (cancelled) {
+            return;
+          }
+
+          setIsMarkerActive(true);
+
+          animationTimeoutRef.current = window.setTimeout(() => {
+            if (cancelled) {
+              return;
+            }
+
+            startTypingLoop();
+          }, 4300);
+        }, 300);
+      };
+
+      animationTimeoutRef.current = window.setTimeout(typeNextCharacter, 220);
+    };
+
+    startTypingLoop();
+
+    return () => {
+      cancelled = true;
+      if (animationTimeoutRef.current) {
+        window.clearTimeout(animationTimeoutRef.current);
+      }
+    };
+  }, [isMouInView]);
+
+  const typedHighlight = mouHighlightText.slice(0, typedLength);
 
   return (
     <div className="flex flex-col" data-testid="page-home">
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        <div className="hero-orb hero-orb-primary" />
+        <div className="hero-orb hero-orb-accent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-[1.02fr_0.98fr] gap-10 xl:gap-14 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <Badge variant="secondary" className="text-sm px-4 py-1.5">
+                <Badge variant="secondary" className="text-sm px-4 py-1.5 shadow-sm">
                   <Sparkles className="h-4 w-4 mr-2" />
                   <span>Empowering India Through Skill Development</span>
                 </Badge>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="max-w-3xl text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                   Empowering Careers with{" "}
                   <span className="text-gradient">Industry-Ready IT Training</span>
                 </h1>
-                <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+                <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
                   iFocus Info Solutions offers job-oriented training with hands-on projects, expert mentors, placement support, and flexible online/offline classes.
                 </p>
               </div>
@@ -113,60 +247,85 @@ export default function Home() {
                   <span className="text-sm">Expert Trainers</span>
                 </div>
               </div>
+              <div className="grid gap-3 rounded-[26px] border border-border/70 bg-card/90 p-4 shadow-xl shadow-primary/5 backdrop-blur-xl sm:grid-cols-[1.3fr_0.7fr] sm:p-5">
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                    <Rocket className="h-3.5 w-3.5" />
+                    Start your journey
+                  </div>
+                  <h2 className="text-xl font-bold leading-tight sm:text-2xl">
+                    Get personalized career guidance before you choose a course.
+                  </h2>
+                  <p className="text-sm text-muted-foreground sm:text-[15px]">
+                    Speak with our mentors, compare tracks, and build a job-focused learning plan that fits your goals.
+                  </p>
+                </div>
+                <div className="grid gap-3">
+                  <div className="rounded-2xl bg-muted/70 p-3">
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">What you get</p>
+                    <p className="mt-1 text-sm font-semibold">Course matching, mentor input, and placement guidance.</p>
+                  </div>
+                  <Link href="/contact">
+                    <Button className="w-full" data-testid="button-schedule-call">
+                      Schedule Free Call
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div className="hidden lg:flex justify-center">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-3xl" />
-                <Card className="relative w-full max-w-md overflow-visible">
-                  <CardContent className="p-8 space-y-6">
-                    <div className="text-center space-y-2">
-                      <h3 className="font-serif text-xl font-semibold">
-                        Start Your Journey
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        Get a free career counseling session
-                      </p>
+            <div className="flex justify-center">
+              <div ref={mouCardRef} className="relative w-full max-w-[34rem]">
+                <div className="absolute -inset-5 rounded-[40px] bg-gradient-to-r from-primary/12 via-transparent to-accent/18 blur-3xl" />
+                <Card className="relative overflow-hidden rounded-[30px] border border-border/70 bg-card shadow-2xl shadow-primary/10">
+                  <CardContent className="p-4 sm:p-5">
+                    <div className="rounded-[24px] border border-border/60 bg-gradient-to-br from-primary/[0.05] via-background to-accent/[0.06] p-3 sm:p-4">
+                      <div className="mb-4 flex items-center justify-between gap-3">
+                        <Badge className="border-0 bg-primary/10 px-3 py-1 text-primary shadow-none">
+                          <Handshake className="mr-2 h-3.5 w-3.5" />
+                          MoU Highlight
+                        </Badge>
+                        <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                          APPC Partnership
+                        </p>
+                      </div>
+
+                      <div className="overflow-hidden rounded-[22px] border border-border/60 bg-white shadow-lg shadow-primary/5">
+                        <div className="aspect-square bg-slate-50 p-3">
+                          <img
+                            src="/ifocus_mou.jpeg"
+                            alt="iFocus Info Solutions and APPC Memorandum of Understanding signing ceremony"
+                            className="h-full w-full rounded-[18px] object-contain object-center"
+                          />
+                        </div>
+                        <div className="border-t border-border/60 bg-card px-5 py-5">
+                          <div className="space-y-3">
+                            <h2 className="text-2xl font-bold leading-tight sm:text-[2rem]">
+                              iFocus enters a signed MoU with APPC.
+                            </h2>
+                            <p className="relative text-sm leading-7 text-muted-foreground sm:text-[15px]">
+                              <span className="invisible block">
+                                {renderMouText(mouHighlightText, false)}
+                              </span>
+                              <span className="absolute inset-0 block">
+                                {renderMouText(
+                                  typedHighlight,
+                                  isMarkerActive && typedLength === mouHighlightText.length
+                                )}
+                                {isMouInView ? (
+                                  <span className="typewriter-caret" aria-hidden="true" />
+                                ) : null}
+                              </span>
+                            </p>
+                          </div>
+
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">Consultancy services</span>
+                            <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">Training programs</span>
+                            <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">Research activities</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/50">
-                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Code2 className="h-5 w-5 text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-sm">50+ Courses</p>
-                          <p className="text-xs text-muted-foreground">
-                            Across 10 domains
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/50">
-                        <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                          <Target className="h-5 w-5 text-accent" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-sm">Job Guarantee</p>
-                          <p className="text-xs text-muted-foreground">
-                            100% placement assistance
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-muted/50">
-                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Award className="h-5 w-5 text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-sm">Certification</p>
-                          <p className="text-xs text-muted-foreground">
-                            Industry-recognized certificates
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <Link href="/contact" className="block">
-                      <Button className="w-full" data-testid="button-schedule-call">
-                        Schedule Free Call
-                      </Button>
-                    </Link>
                   </CardContent>
                 </Card>
               </div>
