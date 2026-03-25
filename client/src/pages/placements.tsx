@@ -15,6 +15,9 @@ import {
   Briefcase,
   Target,
   Calendar,
+  Sparkles,
+  Handshake,
+  Camera,
 } from "lucide-react";
 
 const recentPlacements = [
@@ -132,26 +135,94 @@ const placementProcess = [
   }
 ];
 
+const placementDriveHighlights = [
+  {
+    image: "/placement1.jpeg",
+    label: "Placement Drive",
+    title: "Live hiring moments at iFocus",
+    description:
+      "Students engaging in placement-drive sessions with focused support and interview-ready guidance.",
+  },
+  {
+    image: "/placement2.jpeg",
+    label: "Campus Energy",
+    title: "Preparation meets opportunity",
+    description:
+      "A look into active drive-day coordination, candidate participation, and recruiter-facing readiness.",
+  },
+  {
+    image: "/placement3.jpeg",
+    label: "Career Outcomes",
+    title: "Where training moves into action",
+    description:
+      "Real placement activity that reflects the transition from classroom preparation to career opportunities.",
+  },
+];
+
 export default function Placements() {
   return (
     <div className="flex flex-col" data-testid="page-placements">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 pb-24 pt-8 sm:pb-28 sm:pt-12">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        <div className="hero-orb hero-orb-primary" />
+        <div className="hero-orb hero-orb-accent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-4">
-              Placement Support
-            </Badge>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-              100% <span className="text-gradient">Placement Assistance</span>
+          <div className="relative z-10 mb-12 grid h-auto grid-cols-1 gap-4 sm:mb-16 sm:grid-cols-3 lg:mb-20 lg:h-[450px] lg:gap-6">
+            {placementDriveHighlights.map((item, index) => (
+              <div
+                key={item.image}
+                className={[
+                  "group relative overflow-hidden rounded-2xl shadow-xl lg:rounded-[2rem]",
+                  index === 0 ? "sm:mt-8" : "",
+                  index === 1 ? "z-10 sm:-mt-4 sm:mb-12 shadow-2xl" : "",
+                  index === 2 ? "sm:-mb-4 sm:mt-12" : "",
+                ].join(" ")}
+              >
+                <div className="absolute inset-0 bg-card/70" />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
+                <div className="absolute bottom-6 left-6 right-6 z-20">
+                  <span
+                    className={[
+                      "mb-2 inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-md",
+                      index === 0 ? "bg-primary" : "",
+                      index === 1 ? "bg-accent" : "",
+                      index === 2 ? "bg-primary/85" : "",
+                    ].join(" ")}
+                  >
+                    {item.label}
+                  </span>
+                  <h3 className="text-lg font-bold leading-tight text-white drop-shadow-md lg:text-xl">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mx-auto flex max-w-4xl flex-col items-center space-y-8 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary">
+              <Sparkles className="h-4 w-4" />
+              <span>Placement Support</span>
+            </div>
+
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+              Placement drives that feel structured, active, and{" "}
+              <span className="text-gradient">outcome-focused.</span>
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              We don't just train you, we ensure you get placed. With our dedicated placement team, 
-              industry connections, and comprehensive support, your dream job is within reach.
+
+            <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              We don't just train you for interviews. We prepare you for real hiring environments with dedicated placement support, recruiter-facing readiness, and active drive coordination at iFocus.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+
+            <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Link href="/contact">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2 shadow-lg shadow-primary/20">
                   Get Placement Support
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -161,6 +232,21 @@ export default function Placements() {
                   View Courses
                 </Button>
               </Link>
+            </div>
+
+            <div className="mt-4 flex w-full max-w-3xl flex-wrap justify-center gap-6 border-t border-border/60 pt-8 sm:gap-12">
+              <div className="flex items-center gap-2">
+                <Handshake className="h-5 w-5 text-primary" />
+                <span className="text-sm font-semibold text-foreground">Drive-day support</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Camera className="h-5 w-5 text-accent" />
+                <span className="text-sm font-semibold text-foreground">Real event snapshots</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-primary" />
+                <span className="text-sm font-semibold text-foreground">Career momentum</span>
+              </div>
             </div>
           </div>
         </div>
